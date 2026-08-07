@@ -1,14 +1,22 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // all the code here
-  function main() {  
-    let todos = []; // store all the todos
+  function renderTodos(todos) {
+    const todoTable = document.querySelector("#tableBody");
+    todoTable.innerHTML = "";
 
-    // add three todos
-    addTodo(todos, "Walk the dog", "Medium", "Pending", "25-08-2026");
-    addTodo(todos, "Clean the room", "Low", "Completed", "16-08-2026");
-    addTodo(todos, "Pay the bill", "High", "In-Progress", "30-08-2026"); 
+    for (let i = 0; i < todos.length; i++) {
+      const rowNumber = i + 1;
+      const t = todos[i];
+      const newTableRow = document.createElement("tr");
+      newTableRow.innerHTML = `
+                    <th>${rowNumber}</th>
+                    <td>${t.taskName}</td>
+                    <td>${t.priority}</td>
+                    <td>${t.dueDate}</td>
+                    <td>${t.taskStatus}</td>
+      `
+
+      todoTable.appendChild(newTableRow);
+    }
   }
-
-  main();
-  
 });
