@@ -1,0 +1,36 @@
+.addTaskForm {
+    display: flex;
+    gap: 20px;
+    padding: 5px 15px;
+}
+
+.innerDivText {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.innerDivRadio {
+    display: flex;
+    flex: 1;
+    padding: 5px;
+}
+
+.divBtn {
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+}
+
+.form-label {
+    margin-right: 4px;
+}
+
+.form-check-input {
+    margin-right: 3px;
+}
+
+.optionRadio {
+    margin-right: 3px;
+}

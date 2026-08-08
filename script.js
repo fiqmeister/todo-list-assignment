@@ -19,4 +19,5 @@ document.addEventListener("DOMContentLoaded", function () {
       todoTable.appendChild(newTableRow);
     }
   }
+  renderTodos(todos);
 });
