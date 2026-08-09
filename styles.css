@@ -34,3 +34,13 @@
 .optionRadio {
     margin-right: 3px;
 }
+
+#error-task-input {
+    color:red;
+    font-size: small;
+}
+
+#error-date-input {
+    color:red;
+    font-size: small;
+}
