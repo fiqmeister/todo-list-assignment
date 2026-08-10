@@ -1,4 +1,6 @@
 const JSON_BIN_BASE_URL = "https://api.jsonbin.io/v3";
+// "https://api.jsonbin.io/v3";
+// "https://zany-lamp-69jvgqrp4p9vh5v65-3001.app.github.dev/"
 const JSON_BIN_ID = "6a788e61da38895dfecd459f";
 
 let todos = [];
@@ -63,18 +65,21 @@ async function loadTodos() {
 async function saveTodos(todos) {
   try {
     await axios.put(`${JSON_BIN_BASE_URL}/b/${JSON_BIN_ID}`, todos);
-    alert("Task successfully saved!");
+    Swal.fire("Your task list has been successfully saved!");
   } catch (error) {
-    alert("Failed to save task list!");
+    Swal.fire("Failed to save task list!");
   }
+}
 //find task by word search, loop to search the data that contains the word
-  async function findTodo(todos, query){
+  function findTodo(todos, query){
+    const result = [];
+
     for (let t of todos){
-      const tname = t.taskName;
-      if (tname.includes(query)) {
-        
+      const tname = t.taskName.toLowerCase();
+      //console.log("checking:", tname, "against", query.toLowerCase());
+      if (tname.includes(query.toLowerCase())) {
+        result.push(t);
       }
     }
+    return result;
   }
-  
-}

@@ -24,13 +24,28 @@ document.addEventListener("DOMContentLoaded", async function () {
       `
       // Delete Button action
       newTableRow.querySelector(".deleteBtn").addEventListener("click", function () {
-        const confirmation = confirm("Do you want to delete the task: " + t.taskName + "?");
-        if (confirmation) {
-          deleteTodo(todos, t.id);
-          renderTodos(todos);
-        }
+        //const confirmation = confirm("Do you want to delete the task: " + t.taskName + "?");
+        const confirmation = Swal.fire({
+          title: 'Are you sure you want to delete this task?',
+          html: `"${t.taskName}?"`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            deleteTodo(todos, t.id);
+            renderTodos(todos);
+            Swal.fire('Deleted!', 'Your task has been deleted.', 'success')
+          }
+        })
       })
-
+      // if (confirmation) {
+      //   deleteTodo(todos, t.id);
+      //   renderTodos(todos);
+      // }
       // Update Button action
       newTableRow.querySelector(".editBtn").addEventListener("click", function () {
         const editName = prompt("New Task Name", t.taskName);
@@ -60,17 +75,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!validationResult) {
       return; //if validation fails, stop here
     }
+    // change the date format to DD-MM-YYYY
+    const formattedDueDate = formatDate(dueDate);
 
-    const inputCheck = addTodo(todos, taskName, selectedPriority, selectedStatus, dueDate);
+    const inputCheck = addTodo(todos, taskName, selectedPriority, selectedStatus, formattedDueDate);
     renderTodos(todos);
 
     if (inputCheck) {
       inputTaskName.value = "";
       inputDueDate.value = "";
+      Swal.fire({
+        title: 'Added to list !',
+        html: `Your task <br><b>"${taskName}"</b><br> has been successfully added.`,
+      });
     }
 
   })
-  document.querySelector("#saveBtn").addEventListener("click", function (){
+  document.querySelector("#saveBtn").addEventListener("click", function () {
     saveTodos(todos);
   })
   //Validation function for the Task Name textinput & date input 
@@ -93,9 +114,22 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     return true;
   }
+  // function to change dueDate format from YYYY-MM-DD to DD-MM-YYYY
+  function formatDate(dateString) {
+    const dateParts = dateString.split("-");
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  }
+
+  // Search Button and render only what is found in the search result
+  document.querySelector("#searchBtn").addEventListener("click", function () {
+    const query = document.querySelector("#searchTerms").value;
+    const result = findTodo(todos, query);
+    renderTodos(result);
+  })
+  // Clear Button
+  document.querySelector("#clearBtn").addEventListener("click", function () {
+    document.querySelector("#searchTerms").value = "";
+    renderTodos(todos);
+  })
 });
-document.querySelector("#searchBtn").addEventListener("click", async function () {
-  const query = document.querySelector("#searchTerms").value;
-  const result = await findTodo(todos, query);
-  renderTodos(result);
-})
+

@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="styles.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.23.0/dist/sweetalert2.min.css" rel="stylesheet"
 </head>
 
 <body>
@@ -59,6 +61,7 @@
             <div id="searchFunction">
                 <input type="text" id="searchTerms" class="form-control" placeholder="Search task name" />
                 <button id="searchBtn" class="btn btn-primary ">Search</button>
+                <button id="clearBtn" class="btn btn-secondary ">Clear</button>
             </div>
             <div class="divBtn">
                 <button id="saveBtn" class="btn btn-success">Save List</button>
@@ -82,6 +85,8 @@
             </table>
         </div>
     </div>
+    <!-- sweetalert2 script-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.23.0/dist/sweetalert2.all.min.js"></script>
     <!-- Scripts and axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios@1.19.0/dist/axios.min.js"></script>
     <script src="data.js"></script>

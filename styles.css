@@ -21,9 +21,10 @@
     display: flex;
     padding: 5px 0px;
 }
+
 #searchFunction {
     display: flex;
-    flex: 1;
+    flex: 2;
     gap: 10px;
 }
 
@@ -46,13 +47,18 @@
 }
 
 #error-task-input {
-    color:red;
+    color: red;
     font-size: small;
 }
 
 #error-date-input {
-    color:red;
+    color: red;
     font-size: small;
+}
+
+.my-custom-icon {
+    width: 60px;
+    height: 60px;
 }
 
 thead {
