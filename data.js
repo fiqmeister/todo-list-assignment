@@ -1,24 +1,9 @@
+const JSON_BIN_BASE_URL = "https://api.jsonbin.io/v3";
+const JSON_BIN_ID = "6a788e61da38895dfecd459f";
+
 let todos = [];
-
-
+//Add Todo with simple validation
 function addTodo(todos, taskName, priority, taskStatus, dueDate) {
-  const errorTaskInput = document.querySelector("#error-task-input");
-  const errorDateInput = document.querySelector("#error-date-input");
-
-  if (!taskName) {
-    errorTaskInput.innerHTML = "This field cannot be left blank.";
-    return;
-  } else {
-    errorTaskInput.innerHTML = "";
-  }
-
-  if (!dueDate) {
-    errorDateInput.innerHTML = "Please select a date.";
-    return;
-  } else {
-    errorDateInput.innerHTML = "";
-  }
-
   let newTodo = {
     "id": Math.floor(Math.random() * 100 + 1),
     "taskName": taskName,
@@ -27,10 +12,10 @@ function addTodo(todos, taskName, priority, taskStatus, dueDate) {
     "dueDate": dueDate
   };
   todos.push(newTodo);
-
+  return true; //return true for adding new task
 }
 
-//
+//Replace function when user editing the parameters
 function modifyTodo(todos, id, newTaskName, newPriority, newTaskStatus, newDueDate) {
   const modifedTodo = {
     "id": id,
@@ -68,4 +53,28 @@ function deleteTodo(todos, id) {
   } else {
     throw new Error(`Todo with ID ${id} does not exist.`);
   }
+}
+//load data from JSONBin via URL & Bin ID
+async function loadTodos() {
+  const response = await axios.get(`${JSON_BIN_BASE_URL}/b/${JSON_BIN_ID}/latest`);
+  return response.data.record;
+}
+//save data into JSONBin via URL & Bin ID
+async function saveTodos(todos) {
+  try {
+    await axios.put(`${JSON_BIN_BASE_URL}/b/${JSON_BIN_ID}`, todos);
+    alert("Task successfully saved!");
+  } catch (error) {
+    alert("Failed to save task list!");
+  }
+//find task by word search, loop to search the data that contains the word
+  async function findTodo(todos, query){
+    for (let t of todos){
+      const tname = t.taskName;
+      if (tname.includes(query)) {
+        
+      }
+    }
+  }
+  
 }

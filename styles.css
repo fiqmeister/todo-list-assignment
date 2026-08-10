@@ -1,7 +1,7 @@
 .addTaskForm {
     display: flex;
     gap: 20px;
-    padding: 5px 15px;
+    padding: 5px 0px;
 }
 
 .innerDivText {
@@ -17,10 +17,20 @@
     padding: 5px;
 }
 
+#moreFunction {
+    display: flex;
+    padding: 5px 0px;
+}
+#searchFunction {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
+
 .divBtn {
     display: flex;
+    flex: 1;
     justify-content: end;
-    padding-right: 20px;
 }
 
 .form-label {
@@ -43,4 +53,12 @@
 #error-date-input {
     color:red;
     font-size: small;
+}
+
+thead {
+    font-size: medium;
+}
+
+td {
+    font-size: 16px;
 }
